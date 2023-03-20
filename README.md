@@ -1,0 +1,66 @@
+# Anti-drone
+This repository contains the path planning algorithm for an anti-drone system. 
+
+### Usage instructions
+Create the catkin_ws, clone the repo, build and source the workspace using
+```
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/AshwinDisa/anti_drone.git
+$ cd ..
+$ catkin_make
+$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+$ source ~/.bashrc
+```
+
+## For SITL
+Install and build
+PX4 Firmware - https://github.com/PX4/PX4-Autopilot or Ardupilot - https://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
+
+mavros - https://docs.px4.io/main/en/ros/mavros_installation.html
+
+QGC - https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html
+
+Add the following lines to your bashrc or copy paste in terminal everytime you want to launch px4 sitl in gazebo environment 
+```
+$ cd /home/owner/PX4-Autopilot
+$ source Tools/simulation/gazebo-classic/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+$ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
+$ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/simulation/gazebo-classic/sitl_gazebo-classic
+```
+Make sure this line is present in your bashrc
+```
+$ export ROS_MASTER_URI=http://127.0.0.1:11311/
+```
+
+Launch the gazebo environment, mavros and open the QGC application
+```
+$ roslaunch px4 mavros_posix_sitl.launch
+```
+
+Takeoff the drone using 'commander takeoff' command in terminal or directly from QGC
+
+Run any of the rosbags with the command and remap the rostopic names
+```
+$ cd catkin_ws/src/anti_drone/src/rosbags/
+$ rosbag play -l rosbag_test1_2023-02-21-11-17-35.bag /mavros/local_position/pose:=/mavros/local_position/pose/old /mavros/local_position/velocity_local:=/mavros/local_position/velocity_local/old
+```
+
+Make the code executable and run the visualization code
+```
+$ cd catkin_ws/src/anti_drone/src
+$ chmod +x visualization_3.py
+$ python3 visualization_3.py
+```
+
+Finally run the anti-drone algorithm 
+```
+$ cd catkin_ws/src/anti_drone/src
+$ chmod +x anti_v1.py
+$ python3 anti_v1.py
+```
+Change the flight mode to "OFFBOARD" for PX4 Firmware and "GUIDED" for Ardupilot
+
+
+
+
