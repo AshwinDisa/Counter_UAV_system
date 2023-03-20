@@ -1,7 +1,8 @@
 # Anti-drone
 This repository contains the path planning algorithm for an anti-drone system. 
 
-### Usage instructions
+## Usage instructions
+### Tested with Ubuntu 20.04, ROS Noetic
 Create the catkin_ws, clone the repo, build and source the workspace using
 ```
 $ mkdir -p ~/catkin_ws/src
@@ -13,13 +14,19 @@ $ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-## For SITL
+## SITL
 Install and build
 PX4 Firmware - https://github.com/PX4/PX4-Autopilot or Ardupilot - https://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
 
 mavros - https://docs.px4.io/main/en/ros/mavros_installation.html
 
 QGC - https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html
+
+Extra dependencies
+```
+pip3 install modern-robotics
+pip3 install future
+```
 
 Add the following lines to your bashrc or copy paste in terminal everytime you want to launch px4 sitl in gazebo environment 
 ```
@@ -61,6 +68,27 @@ $ python3 anti_v1.py
 ```
 Change the flight mode to "OFFBOARD" for PX4 Firmware and "GUIDED" for Ardupilot
 
+## Hardware
+### Tested with Ubuntu 20.04, ROS Noetic on Raspberry Pi 4 Model B, CubeOrange and Ardupilot v...
+Install packages and dependencies on Rpi as needed
+```
+sudo apt-get install ros-noetic-mavros ros-noetic-mavros-extras
+pip3 install modern-robotics
+pip3 install MAVProxy
+pip3 install pymavlink
+```
+Run the following commands to connect to the fcu and gcs
+```
+mavproxy.py --out=udp:127.0.0.1:14551
+roslaunch mavros apm.launch fcu_url:=udp://:14551@ gcs_url:=udp://:14550@<gcs-ip-address>:14550
+```
 
+Finally run the anti-drone algorithm 
+```
+$ cd catkin_ws/src/anti_drone/src
+$ chmod +x anti_v1.py
+$ python3 anti_v1.py
+```
+Change the flight mode to "OFFBOARD" for PX4 Firmware and "GUIDED" for Ardupilot
 
 
