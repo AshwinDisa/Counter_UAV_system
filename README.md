@@ -30,7 +30,7 @@ pip3 install future
 
 Add the following lines to your bashrc or copy paste in terminal everytime you want to launch px4 sitl in gazebo environment 
 ```
-$ cd /home/owner/PX4-Autopilot
+$ cd /<path-to-firmware>/PX4-Autopilot
 $ source Tools/simulation/gazebo-classic/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
 $ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
 $ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/simulation/gazebo-classic/sitl_gazebo-classic
@@ -53,14 +53,14 @@ $ cd catkin_ws/src/anti_drone/src/rosbags/
 $ rosbag play -l rosbag_test1_2023-02-21-11-17-35.bag /mavros/local_position/pose:=/mavros/local_position/pose/old /mavros/local_position/velocity_local:=/mavros/local_position/velocity_local/old
 ```
 
-Make the code executable and run the visualization code
+Make the visualization code executable and run 
 ```
 $ cd catkin_ws/src/anti_drone/src
 $ chmod +x visualization_3.py
 $ python3 visualization_3.py
 ```
 
-Finally run the anti-drone algorithm 
+Finally run the anti-drone algorithm
 ```
 $ cd catkin_ws/src/anti_drone/src
 $ chmod +x anti_v1.py
@@ -77,7 +77,7 @@ pip3 install modern-robotics
 pip3 install MAVProxy
 pip3 install pymavlink
 ```
-Run the following commands to connect to the fcu and gcs
+Run the following commands in seperate terminals to connect to the fcu and gcs 
 ```
 mavproxy.py --out=udp:127.0.0.1:14551
 roslaunch mavros apm.launch fcu_url:=udp://:14551@ gcs_url:=udp://:14550@<gcs-ip-address>:14550
