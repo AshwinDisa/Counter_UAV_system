@@ -50,7 +50,7 @@ Takeoff the drone using 'commander takeoff' command in terminal or directly from
 Run any of the rosbags with the command and remap the rostopic names
 ```
 $ cd catkin_ws/src/anti_drone/src/rosbags/
-$ rosbag play -l rosbag_test1_2023-02-21-11-17-35.bag /mavros/local_position/pose:=/mavros/local_position/pose/old /mavros/local_position/velocity_local:=/mavros/local_position/velocity_local/old
+$ rosbag play -l circle.bag /mavros/local_position/pose:=/mavros/local_position/pose/old /mavros/local_position/velocity_local:=/mavros/local_position/velocity_local/old
 ```
 
 Make the visualization code executable and run 
@@ -81,6 +81,17 @@ Run the following commands in seperate terminals to connect to the fcu and gcs
 ```
 mavproxy.py --out=udp:127.0.0.1:14551
 roslaunch mavros apm.launch fcu_url:=udp://:14551@ gcs_url:=udp://:14550@<gcs-ip-address>:14550
+```
+Run any of the rosbags with the command and remap the rostopic names
+```
+$ cd catkin_ws/src/anti_drone/src/rosbags/
+$ rosbag play -l straight.bag /mavros/local_position/pose:=/mavros/local_position/pose/old /mavros/local_position/velocity_local:=/mavros/local_position/velocity_local/old
+```
+Make the visualization code executable and run 
+```
+$ cd catkin_ws/src/anti_drone/src
+$ chmod +x visualization_3.py
+$ python3 visualization_3.py
 ```
 
 Finally run the anti-drone algorithm 
