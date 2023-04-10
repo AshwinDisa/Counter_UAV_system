@@ -75,6 +75,22 @@ class main():
             text = "001: Pose".encode('utf-8')
             sender.mav.statustext_send(mavutil.mavlink.MAV_SEVERITY_INFO, text)
 
+        elif (argument == '7'):
+
+            altitude = input("Enter Altitude ") 
+            circle_x = input("Enter x of centre ")
+            circle_y = input("Enter y of centre ")
+            radius = input("Enter Radius ") 
+        
+            altitude = '%02d' % int(altitude)
+            circle_x = '%02d' % int(circle_x)
+            circle_y = '%02d' % int(circle_y)
+            radius = '%02d' % int(radius)
+
+            tup = ('001: Circle', ' ,', altitude, ',', circle_x, ',', circle_y, ',', radius)
+            text = ''.join(tup).encode('utf-8')
+            sender.mav.statustext_send(mavutil.mavlink.MAV_SEVERITY_INFO, text)
+
         elif (argument == '69'):
 
             if (self.arm_flag == 0):
@@ -127,5 +143,5 @@ if __name__ == "__main__":
 
     main_obj = main()
 
-    argument = input("----------------------\nPress 0 --- Follow\nPress 1 --- Kill\nPress 2 --- RTL\nPress 3 --- Abort\nPress 4 --- Takeoff\nPress 5 --- Current pose\nPress 6 --- Waypoint\nPress 69 --- Arm\nInput: ")
+    argument = input("----------------------\nPress 0 --- Follow\nPress 1 --- Kill\nPress 2 --- RTL\nPress 3 --- Abort\nPress 4 --- Takeoff\nPress 5 --- Current pose\nPress 6 --- Waypoint\nPress 7 --- Circle\nPress 69 --- Arm\nInput: ")
     main_obj.number_to_string(argument)
