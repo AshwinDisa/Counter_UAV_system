@@ -1,5 +1,3 @@
-This repository contains the path planning algorithm for an counter-UAV system. 
-
 ## Usage instructions
 ### Tested with Ubuntu 20.04, ROS Noetic
 Create the catkin_ws, clone the repo, build and source the workspace using
