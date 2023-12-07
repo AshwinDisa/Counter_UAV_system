@@ -1,5 +1,4 @@
-# Anti-drone
-This repository contains the path planning algorithm for an anti-drone system. 
+This repository contains the path planning algorithm for an counter-UAV system. 
 
 ## Usage instructions
 ### Tested with Ubuntu 20.04, ROS Noetic
@@ -102,4 +101,5 @@ $ python3 anti_v1.py
 ```
 Change the flight mode to "OFFBOARD" for PX4 Firmware and "GUIDED" for Ardupilot
 
+### Project part of internship at Arka Aerospace and Robotics Research Center, IIIT Hyderabad.
 
